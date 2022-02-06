@@ -27,6 +27,7 @@
     align-items: center;
     border-radius: 50%;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .emoji-group {

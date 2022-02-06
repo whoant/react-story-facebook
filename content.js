@@ -5,4 +5,11 @@ function injectHook(url) {
     (document.head || document.body || document.documentElement).appendChild(hookScript);
 }
 
-injectHook(chrome.extension.getURL("/lib/story.js"));
+function injectJs(url) {
+    const hookScript = document.createElement("script");
+    hookScript.src = url;
+    (document.head || document.body || document.documentElement).appendChild(hookScript);
+}
+
+injectJs(chrome.extension.getURL('/lib/emoji.js'));
+injectHook(chrome.extension.getURL('/lib/story.js'));
