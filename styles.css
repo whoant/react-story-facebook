@@ -1,0 +1,65 @@
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.react-container {
+    position: relative;
+}
+
+.btn-react {
+    height: 50px;
+    width: 50px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.emoji-group {
+    position: absolute;
+    right: -280px;
+    bottom: 60px;
+    height: 200px;
+    width: 300px;
+    padding: 15px;
+    list-style: none;
+    margin: 0;
+    display: none;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    overflow-y: scroll;
+    z-index: 1000;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.emoji-group--show {
+    display: flex;
+}
+
+.emoji {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.emoji:hover {
+    background-color: red;
+}

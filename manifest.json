@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "React Story Facebook",
+  "description": "React Story Facebook",
+  "version": "1.0.0",
+  "icons": {
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "lib/story.js"
+  ],
+  "permissions": [
+    "https://www.facebook.com/*"
+  ]
+}
