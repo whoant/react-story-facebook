@@ -5,6 +5,11 @@
   "version": "1.0.0",
   "icons": {
   },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
   "content_scripts": [
     {
       "matches": [
@@ -23,6 +28,7 @@
     "lib/emoji.js"
   ],
   "permissions": [
+    "tabs",
     "https://www.facebook.com/*"
   ]
 }
