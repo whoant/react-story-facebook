@@ -1,17 +1,25 @@
-const ID_USER = require('RelayAPIConfigDefaults').actorID;
-const FB_DTSG = require('DTSGInitData').token;
+// const ID_USER = require('RelayAPIConfigDefaults').actorID;
+// const FB_DTSG = require('DTSGInitData').token;
 
-const listStory = document.getElementsByClassName('b3onmgus ph5uu5jm g3eujd1d');
-for (let i = 0; i < listStory.length; i++) {
-    listStory[i].addEventListener('click', loadModal, false);
-}
 
-loadModal();
+(async () => {
+    if (document.getElementsByClassName('btn-react').length > 0) return;
+    try {
+        const emojiJson = await fetch(chrome.extension.getURL('/db/emoji.json'));
+        const EMOJI_LIST = await emojiJson.json();
+        loadModal(EMOJI_LIST);
+    } catch (e) {
+        console.error(e);
+    }
 
-function loadModal() {
+})();
 
+
+function loadModal(EMOJI_LIST) {
+    const fb_dtsg = getFbdtsg();
+    const user_id = getUserId();
+    console.log({fb_dtsg, user_id});
     const timeoutCheckStoriesFooter = setInterval(() => {
-
         const btnReact = document.createElement('div');
         btnReact.textContent = "MORE";
         btnReact.setAttribute('class', 'btn-react');
@@ -31,7 +39,7 @@ function loadModal() {
             emojiLi.onclick = async function () {
                 const storyId = getIdStory();
                 try {
-                    await reactStory(storyId, emoji.value);
+                    await reactStory(user_id, fb_dtsg, storyId, emoji.value);
                     console.log(storyId + " : " + emoji.value);
                 } catch (e) {
                     console.error(e);
@@ -60,7 +68,20 @@ function getIdStory() {
     return htmlStory[htmlStory.length - 1].getAttribute('data-id');
 }
 
-function reactStory(story_id, message) {
+
+function getFbdtsg() {
+    const regex = /"DTSGInitialData",\[],{"token":"(.+?)"/gm;
+    const resp = regex.exec(document.documentElement.innerHTML);
+    return resp[1];
+}
+
+function getUserId() {
+    const regex = /c_user=(\d+);/gm;
+    const resp = regex.exec(document.cookie);
+    return resp[1];
+}
+
+function reactStory(user_id, fb_dtsg, story_id, message) {
     return new Promise(async (resolve, reject) => {
         const variables = {
             input: {
@@ -70,16 +91,16 @@ function reactStory(story_id, message) {
                 },
                 story_id,
                 story_reply_type: 'LIGHT_WEIGHT',
-                actor_id: ID_USER,
+                actor_id: user_id,
                 client_mutation_id: 7,
             },
         };
 
         const body = new URLSearchParams();
-        body.append('av', ID_USER);
-        body.append('__user', ID_USER);
+        body.append('av', user_id);
+        body.append('__user', user_id);
         body.append('__a', 1);
-        body.append('fb_dtsg', FB_DTSG);
+        body.append('fb_dtsg', fb_dtsg);
         body.append('fb_api_caller_class', 'RelayModern');
         body.append(
             'fb_api_req_friendly_name',
@@ -100,7 +121,7 @@ function reactStory(story_id, message) {
                     body,
                 }
             );
-            let res = await response.json();
+            const res = await response.json();
             if (res.errors) return reject(res);
             resolve(res);
         } catch (error) {

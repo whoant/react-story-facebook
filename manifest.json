@@ -24,8 +24,7 @@
     }
   ],
   "web_accessible_resources": [
-    "lib/story.js",
-    "lib/emoji.js"
+    "db/emoji.json"
   ],
   "permissions": [
     "tabs",

@@ -43,7 +43,6 @@
     flex-flow: row wrap;
     justify-content: space-between;
     overflow-y: scroll;
-    z-index: 1000;
     background-color: #fff;
     border-radius: 10px;
 }
