@@ -19,8 +19,8 @@
 }
 
 .btn-react {
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -32,10 +32,10 @@
 
 .emoji-group {
     position: absolute;
-    right: -280px;
     bottom: 60px;
     height: 200px;
-    width: 300px;
+    right: 0;
+    width: 250px;
     padding: 15px;
     list-style: none;
     margin: 0;
@@ -46,6 +46,7 @@
     background-color: #fff;
     border-radius: 10px;
 }
+
 
 .emoji-group--show {
     display: flex;
