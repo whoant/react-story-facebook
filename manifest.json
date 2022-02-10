@@ -15,9 +15,6 @@
       "matches": [
         "https://www.facebook.com/*"
       ],
-      "js": [
-        "content.js"
-      ],
       "css": [
         "styles.css"
       ]
