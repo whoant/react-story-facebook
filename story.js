@@ -1,7 +1,6 @@
 // const ID_USER = require('RelayAPIConfigDefaults').actorID;
 // const FB_DTSG = require('DTSGInitData').token;
 
-
 (async () => {
     if (document.getElementsByClassName('btn-react').length > 0) return;
     try {
@@ -37,7 +36,7 @@ function loadModal(EMOJI_LIST) {
             emojiLi.setAttribute('value', emoji.value);
             emojiLi.textContent = emoji.value;
             emojiLi.onclick = async function () {
-                const storyId = getIdStory();
+                const storyId = getStoryId();
                 try {
                     await reactStory(user_id, fb_dtsg, storyId, emoji.value);
                     console.log(storyId + " : " + emoji.value);
@@ -54,7 +53,7 @@ function loadModal(EMOJI_LIST) {
         reactContainer.appendChild(btnReact);
         reactContainer.appendChild(emojiGroup);
 
-        const storiesFooter = document.getElementsByClassName('py2didcb j83agx80 btwxx1t3 m7zwrmfr pmk7jnqg kfkz5moi rk01pc8j taijpn5t lqlvxoni');
+        const storiesFooter = document.getElementsByClassName('gaei4kxk alzwoclg jl2a5g8c ov5gjlzi s8sjc6am py3ibqi0 qy9lpsl4 jcxyg2ei ghluej2e');
         if (storiesFooter.length > 0) {
             clearInterval(timeoutCheckStoriesFooter);
             storiesFooter[storiesFooter.length - 1].appendChild(reactContainer);
@@ -63,8 +62,8 @@ function loadModal(EMOJI_LIST) {
     }, 100);
 }
 
-function getIdStory() {
-    const htmlStory = document.getElementsByClassName('k4urcfbm l9j0dhe7 taijpn5t datstx6m j83agx80 bp9cbjyn');
+function getStoryId() {
+    const htmlStory = document.getElementsByClassName('mfclru0v om3e55n1 jcxyg2ei pytsy3co alzwoclg i85zmo3j');
     return htmlStory[htmlStory.length - 1].getAttribute('data-id');
 }
 
