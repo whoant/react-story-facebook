@@ -53,7 +53,7 @@ function loadModal(EMOJI_LIST) {
         reactContainer.appendChild(btnReact);
         reactContainer.appendChild(emojiGroup);
 
-        const storiesFooter = document.getElementsByClassName('gaei4kxk alzwoclg jl2a5g8c ov5gjlzi s8sjc6am py3ibqi0 qy9lpsl4 jcxyg2ei ghluej2e');
+        const storiesFooter = document.getElementsByClassName('x11lhmoz x78zum5 x1q0g3np xsdox4t x10l6tqk xtzzx4i xwa60dl xl56j7k xtuxyv6');
         if (storiesFooter.length > 0) {
             clearInterval(timeoutCheckStoriesFooter);
             storiesFooter[storiesFooter.length - 1].appendChild(reactContainer);
