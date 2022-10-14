@@ -63,7 +63,7 @@ function loadModal(EMOJI_LIST) {
 }
 
 function getStoryId() {
-    const htmlStory = document.getElementsByClassName('mfclru0v om3e55n1 jcxyg2ei pytsy3co alzwoclg i85zmo3j');
+    const htmlStory = document.getElementsByClassName('xh8yej3 x1n2onr6 xl56j7k x5yr21d x78zum5 x6s0dn4');
     return htmlStory[htmlStory.length - 1].getAttribute('data-id');
 }
 
