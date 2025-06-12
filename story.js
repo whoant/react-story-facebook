@@ -3,12 +3,21 @@
 
 (async () => {
     if (document.getElementsByClassName('btn-react').length > 0) return;
-    try {
-        const emojiJson = await fetch(chrome.extension.getURL('/db/emoji.json'));
-        const EMOJI_LIST = await emojiJson.json();
-        loadModal(EMOJI_LIST);
-    } catch (e) {
-        console.error(e);
+
+    const init = async () => {
+        try {
+            const emojiJson = await fetch(chrome.runtime.getURL('db/emoji.json'));
+            const EMOJI_LIST = await emojiJson.json();
+            loadModal(EMOJI_LIST);
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
 
 })();
@@ -17,48 +26,45 @@
 function loadModal(EMOJI_LIST) {
     const fb_dtsg = getFbdtsg();
     const user_id = getUserId();
-    console.log({fb_dtsg, user_id});
-    const timeoutCheckStoriesFooter = setInterval(() => {
-        const btnReact = document.createElement('div');
-        btnReact.textContent = "MORE";
-        btnReact.setAttribute('class', 'btn-react');
+    console.log({ fb_dtsg, user_id });
 
-        const emojiGroup = document.createElement('ul');
-        emojiGroup.setAttribute('class', 'emoji-group');
+    const btnReact = document.createElement('div');
+    btnReact.textContent = 'MORE';
+    btnReact.setAttribute('class', 'btn-react');
 
-        btnReact.onclick = function () {
-            emojiGroup.classList.toggle('emoji-group--show');
-        }
+    const emojiGroup = document.createElement('ul');
+    emojiGroup.setAttribute('class', 'emoji-group');
 
-        EMOJI_LIST.forEach(emoji => {
-            const emojiLi = document.createElement('li');
-            emojiLi.setAttribute('class', 'emoji');
-            emojiLi.setAttribute('value', emoji.value);
-            emojiLi.textContent = emoji.value;
-            emojiLi.onclick = async function () {
-                const storyId = getStoryId();
-                try {
-                    await reactStory(user_id, fb_dtsg, storyId, emoji.value);
-                    console.log(storyId + " : " + emoji.value);
-                } catch (e) {
-                    console.error(e);
-                }
+    btnReact.onclick = function () {
+        emojiGroup.classList.toggle('emoji-group--show');
+    };
+
+    EMOJI_LIST.forEach(emoji => {
+        const emojiLi = document.createElement('li');
+        emojiLi.setAttribute('class', 'emoji');
+        emojiLi.setAttribute('value', emoji.value);
+        emojiLi.textContent = emoji.value;
+        emojiLi.onclick = async function () {
+            const storyId = getStoryId();
+            try {
+                await reactStory(user_id, fb_dtsg, storyId, emoji.value);
+                console.log(storyId + ' : ' + emoji.value);
+            } catch (e) {
+                console.error(e);
             }
+        };
 
-            emojiGroup.appendChild(emojiLi);
-        });
+        emojiGroup.appendChild(emojiLi);
+    });
 
-        const reactContainer = document.createElement('div');
-        reactContainer.setAttribute('class', 'react-container');
-        reactContainer.appendChild(btnReact);
-        reactContainer.appendChild(emojiGroup);
+    const reactContainer = document.createElement('div');
+    reactContainer.setAttribute('class', 'react-container');
+    reactContainer.appendChild(btnReact);
+    reactContainer.appendChild(emojiGroup);
 
-        if (document.body) {
-            clearInterval(timeoutCheckStoriesFooter);
-            document.body.appendChild(reactContainer);
-        }
-
-    }, 100);
+    if (document.body) {
+        document.body.appendChild(reactContainer);
+    }
 }
 
 function getStoryId() {
@@ -127,3 +133,4 @@ function reactStory(user_id, fb_dtsg, story_id, message) {
         }
     });
 }
+
