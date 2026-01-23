@@ -743,5 +743,9 @@
     "url": "https://emojipedia.org/bomb/",
     "image_url": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/apple/285/bomb_1f4a3.png",
     "value": "💣"
-  }
-]
+ }
+ {
+    "url": "https://emojipedia.org/heart-hands/",
+    "image_url": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/apple/285/heart-hands_1f4a3.png",
+    "value": "🫶"
+ }
