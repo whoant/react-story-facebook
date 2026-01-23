@@ -2,35 +2,20 @@
   "manifest_version": 3,
   "name": "React Story Facebook",
   "description": "Inject custom reactions or content into Facebook Stories.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  },
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png"
-    }
   },
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": [
-    "tabs",
-    "scripting",
-    "activeTab"
-  ],
-  "host_permissions": [
-    "https://www.facebook.com/*"
-  ],
   "content_scripts": [
     {
-      "matches": ["https://www.facebook.com/*"],
-      "js": ["content.js"],
-      "css": ["styles.css"]
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "css": [
+        "styles.css"
+      ]
     }
   ],
   "web_accessible_resources": [
@@ -38,5 +23,12 @@
       "resources": ["db/emoji.json"],
       "matches": ["https://www.facebook.com/*"]
     }
+  ],
+  "permissions": [
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.facebook.com/*"
   ]
 }

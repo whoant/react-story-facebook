@@ -4,7 +4,7 @@
 (async () => {
     if (document.getElementsByClassName('btn-react').length > 0) return;
     try {
-        const emojiJson = await fetch(chrome.extension.getURL('/db/emoji.json'));
+        const emojiJson = await fetch(chrome.runtime.getURL('/db/emoji.json'));
         const EMOJI_LIST = await emojiJson.json();
         loadModal(EMOJI_LIST);
     } catch (e) {
@@ -53,7 +53,7 @@ function loadModal(EMOJI_LIST) {
         reactContainer.appendChild(btnReact);
         reactContainer.appendChild(emojiGroup);
 
-        const storiesFooter = document.getElementsByClassName('x11lhmoz x78zum5 x1q0g3np xsdox4t x10l6tqk xtzzx4i xwa60dl xl56j7k xtuxyv6');
+        const storiesFooter = document.getElementsByClassName('x11lhmoz x78zum5 x1q0g3np xsdox4t xbudbmw x10l6tqk xwa60dl xl56j7k xtuxyv6');
         if (storiesFooter.length > 0) {
             clearInterval(timeoutCheckStoriesFooter);
             storiesFooter[storiesFooter.length - 1].appendChild(reactContainer);
@@ -90,15 +90,10 @@ function reactStory(user_id, fb_dtsg, story_id, message) {
                 },
                 story_id,
                 story_reply_type: 'LIGHT_WEIGHT',
-                actor_id: user_id,
-                client_mutation_id: 7,
             },
         };
 
         const body = new URLSearchParams();
-        body.append('av', user_id);
-        body.append('__user', user_id);
-        body.append('__a', 1);
         body.append('fb_dtsg', fb_dtsg);
         body.append('fb_api_caller_class', 'RelayModern');
         body.append(
@@ -107,7 +102,7 @@ function reactStory(user_id, fb_dtsg, story_id, message) {
         );
         body.append('variables', JSON.stringify(variables));
         body.append('server_timestamps', true);
-        body.append('doc_id', '3769885849805751');
+        body.append('doc_id', '9697491553691692');
 
         try {
             const response = await fetch(
